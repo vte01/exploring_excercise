@@ -1,0 +1,30 @@
+C:\Project>cucumber features\test.feature
+Feature: Shop online at Amazon.co.uk
+
+  Scenario: Sign into Amazon.co.uk     # features/test.feature:3
+    Given Amazon.co.uk is open         # features/step_definitions/test_steps.rb:1
+    When I click Sign-in               # features/step_definitions/test_steps.rb:6
+    And enter valid user name password # features/step_definitions/test_steps.rb:13
+    Then I am logged in                # features/step_definitions/test_steps.rb:23
+
+  Scenario: Search for product and verify the first result is related to your product # features/test.feature:9
+    Given Amazon.co.uk is open and I am logged in                                     # features/step_definitions/test_steps.rb:28
+    When I search for "Dive into Python"                                              # features/step_definitions/test_steps.rb:34
+    Then the first result has the word "Dive Into Python" in it                       # features/step_definitions/test_steps.rb:42
+
+  Scenario: verify that the original price of the product matches the price seen in the basket # features/test.feature:14
+    Given Amazon.co.uk is open and I am logged in                                              # features/step_definitions/test_steps.rb:28
+    And I add "Dive into Python" to my basket                                                  # features/step_definitions/test_steps.rb:47
+      £25.99
+    When I check my basket total                                                               # features/step_definitions/test_steps.rb:61
+      £25.99
+    Then it should match the price of "Dive Into Python"                                       # features/step_definitions/test_steps.rb:67
+      TODO (Cucumber::Pending)
+      ./features/step_definitions/test_steps.rb:68:in `/^it should match the price of "([^"]*)"$/'
+      features/test.feature:18:in `Then it should match the price of "Dive Into Python"'
+
+3 scenarios (1 pending, 2 passed)
+11 steps (1 pending, 10 passed)
+1m4.435s
+
+C:\Project>
